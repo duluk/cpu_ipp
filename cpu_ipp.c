@@ -15,6 +15,8 @@
 // 1. Handle normal CPU speeds, like 2.75. Currently integer only.
 // 2. Add long option support, since it's in usage...
 // 3. Need some more error checking. E.g., atoi results.
+// 4. Add '-s' for short output, just the instructions per period given
+// 5. Add '-e' for extra information, which is now always given
 
 
 void
