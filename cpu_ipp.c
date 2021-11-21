@@ -225,8 +225,8 @@ int main(int argc, char ** argv)
     // to a const qualifier. Not sure why it's considered a const qualifier.
     // And if I execute "units[2] = '\0'" it segfaults unless compiled with
     // optimizations. So I used memset instead.
-    char* units = malloc(3);
-    memset(units, 0, 3);
+    char* units = malloc(UNITS_SIZE);
+    memset(units, 0, UNITS_SIZE);
     units =
           opts->multiplier == NANOSECONDS ? "ns"
         : opts->multiplier == MICROSECONDS ? "us"
