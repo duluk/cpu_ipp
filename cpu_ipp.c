@@ -253,7 +253,7 @@ int main(int argc, char ** argv)
         : opts->multiplier == MICROSECONDS ? "us"
         : "ms";
 
-    printf("A CPU running at %luGHz will perform %s instructions in %d%s:\n\n",
+    printf("A CPU running at %luGHz will perform %s instructions in %d%s.\n\n",
         opts->cpu_speed / ONE_BILLION,
         add_comma((opts->cpu_speed / opts->multiplier) * opts->period),
         opts->period,
