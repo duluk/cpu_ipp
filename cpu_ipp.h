@@ -20,15 +20,17 @@ struct options {
     uint64_t cpu_speed;
     uint32_t period;
     uint32_t multiplier;
+    bool     extra_info;
 };
 
 // Prototypes
-void usage(void);
-uint32_t digits10(uint64_t v);
-char* reverse_str(char* s);
 char* add_comma(uint64_t num);
+uint32_t digits10(uint64_t v);
 bool parse_period(char* period, struct options* opts);
 bool parse_options(int argc, char ** argv, struct options* opts);
+char* reverse_str(char* s);
+void show_extra_info(struct options* opts);
+void usage(void);
 
 
 #endif /* __CPU_IPP__ */

@@ -16,7 +16,9 @@
 // 2. Add long option support, since it's in usage...
 // 3. Need some more error checking. E.g., atoi results.
 // 4. Add '-s' for short output, just the instructions per period given
-// 5. Add '-e' for extra information, which is now always given
+// 5. *DONE* Add '-e' for extra information, which is currently always displayed
+// 6. Use CPU speed and topology of current machine, if no cpu speed is given
+//    (OS dependent)
 
 
 void
@@ -26,6 +28,19 @@ usage(void)
     printf("\t--cpu-speed, -c\tCPU speed in GHz\n");
     printf("\t--period, -p\tTime period in [ns, us, ms]\n");
     printf("\n");
+}
+
+void
+show_extra_info(struct options* opts)
+{
+    printf("Here are some other counts based on the given CPU speed:\n");
+    printf("1ms = %s\n", add_comma(opts->cpu_speed / MILLISECONDS));
+    printf("1us = %s\n", add_comma(opts->cpu_speed / MICROSECONDS));
+    printf("1ns = %s\n", add_comma(opts->cpu_speed / NANOSECONDS));
+    printf("\n");
+    printf("10ms = %s\n", add_comma((opts->cpu_speed / MILLISECONDS) * 10));
+    printf("10us = %s\n", add_comma((opts->cpu_speed / MICROSECONDS) * 10));
+    printf("10ns = %s\n", add_comma((opts->cpu_speed / NANOSECONDS) * 10));
 }
 
 // From:
@@ -162,13 +177,19 @@ parse_options(int argc, char ** argv, struct options* opts)
         exit(EXIT_USAGE);
     }
 
-    while ((opt = getopt(argc, argv, "hc:p:")) != -1)
+    // Defaults:
+//    opts->extra_info = false;
+
+    while ((opt = getopt(argc, argv, "ec:hp:")) != -1)
     {
         switch(opt)
         {
             case 'h':
                 usage();
                 exit(EXIT_USAGE);
+            case 'e':
+                opts->extra_info = true;
+                break;
             case 'c':
                 opts->cpu_speed = atoi(optarg);
                 opts->cpu_speed *= ONE_BILLION;
@@ -238,14 +259,10 @@ int main(int argc, char ** argv)
         opts->period,
         units);
     
-    printf("Here are some other counts based on the given CPU speed:\n");
-    printf("1ms = %s\n", add_comma(opts->cpu_speed / MILLISECONDS));
-    printf("1us = %s\n", add_comma(opts->cpu_speed / MICROSECONDS));
-    printf("1ns = %s\n", add_comma(opts->cpu_speed / NANOSECONDS));
-    printf("\n");
-    printf("10ms = %s\n", add_comma((opts->cpu_speed / MILLISECONDS) * 10));
-    printf("10us = %s\n", add_comma((opts->cpu_speed / MICROSECONDS) * 10));
-    printf("10ns = %s\n", add_comma((opts->cpu_speed / NANOSECONDS) * 10));
+    if (opts->extra_info)
+    {
+        show_extra_info(opts);
+    }
 
 
     exit(EXIT_SUCCESS);
