@@ -243,9 +243,9 @@ int main(int argc, char ** argv)
     printf("1us = %s\n", add_comma(opts->cpu_speed / MICROSECONDS));
     printf("1ns = %s\n", add_comma(opts->cpu_speed / NANOSECONDS));
     printf("\n");
-    printf("10ms = %s\n", add_comma(((opts->cpu_speed / MILLISECONDS) * 10)));
-    printf("10us = %s\n", add_comma(((opts->cpu_speed / MICROSECONDS) * 10)));
-    printf("10ns = %s\n", add_comma(((opts->cpu_speed / NANOSECONDS) * 10)));
+    printf("10ms = %s\n", add_comma((opts->cpu_speed / MILLISECONDS) * 10));
+    printf("10us = %s\n", add_comma((opts->cpu_speed / MICROSECONDS) * 10));
+    printf("10ns = %s\n", add_comma((opts->cpu_speed / NANOSECONDS) * 10));
 
 
     exit(EXIT_SUCCESS);
