@@ -6,6 +6,8 @@
 #include <ctype.h>    // isalpha, isdigit
 #include <getopt.h>
 
+#include "cpu_ipp.h"
+
 // Calculate the number of instructions per period (ipp) given the
 // CPU speed and time. First draft. Will add other info later...
 //
@@ -13,29 +15,10 @@
 // 1. Handle normal CPU speeds, like 2.75. Currently integer only.
 // 2. Add long option support, since it's in usage...
 // 3. Need some more error checking. E.g., atoi results.
-// 4. ...
 
-
-#define EXIT_USAGE 3
-
-// DEBUG from the compiler
-#ifndef DEBUG
-#define DEBUG 0
-#endif
-
-#define ONE_BILLION  1000000000
-#define NANOSECONDS  ONE_BILLION
-#define MICROSECONDS 1000000
-#define MILLISECONDS 1000
-
-struct options {
-    uint64_t cpu_speed;
-    uint32_t period;
-    uint32_t multiplier;
-};
 
 void
-usage()
+usage(void)
 {
     printf("cpu_ipp - Calculate number instructions per period\n\n");
     printf("\t--cpu-speed, -c\tCPU speed in GHz\n");
@@ -46,7 +29,8 @@ usage()
 // From:
 // https://www.facebook.com/notes/facebook-engineering/three-optimization-tips-for-c/10151361643253920
 // Andrei Alexandrescu showed this in the above Facebook talk. I believe I am allowed to use it.
-uint32_t digits10(uint64_t v)
+uint32_t
+digits10(uint64_t v)
 {
     // Note: this function does not account for possible sign
 
