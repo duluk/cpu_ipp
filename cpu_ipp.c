@@ -177,10 +177,11 @@ parse_options(int argc, char ** argv, struct options* opts)
         exit(EXIT_USAGE);
     }
 
-    // Defaults:
-//    opts->extra_info = false;
+    // Defaults: (for clarity)
+    opts->extra_info = false;
+    opts->terse = false;
 
-    while ((opt = getopt(argc, argv, "ec:hp:")) != -1)
+    while ((opt = getopt(argc, argv, "ec:hp:t")) != -1)
     {
         switch(opt)
         {
@@ -201,6 +202,9 @@ parse_options(int argc, char ** argv, struct options* opts)
                     printf("Valid values should match: '[0-9]+[nmu]s'\n");
                     exit(EXIT_FAILURE);
                 }
+                break;
+            case 't':
+                opts->terse = true;
                 break;
         }
     }
@@ -253,11 +257,19 @@ int main(int argc, char ** argv)
         : opts->multiplier == MICROSECONDS ? "us"
         : "ms";
 
-    printf("A CPU running at %luGHz will perform %s instructions in %d%s.\n\n",
-        opts->cpu_speed / ONE_BILLION,
-        add_comma((opts->cpu_speed / opts->multiplier) * opts->period),
-        opts->period,
-        units);
+    uint64_t ipp = (opts->cpu_speed / opts->multiplier) * opts->period;
+    if (opts->terse)
+    {
+        printf("%lu\n", ipp);
+    }
+    else
+    {
+        printf("A CPU running at %luGHz will perform %s instructions in %d%s.\n\n",
+            opts->cpu_speed / ONE_BILLION,
+            add_comma(ipp),
+            opts->period,
+            units);
+    }
     
     if (opts->extra_info)
     {

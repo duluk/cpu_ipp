@@ -21,6 +21,7 @@ struct options {
     uint32_t period;
     uint32_t multiplier;
     bool     extra_info;
+    bool     terse;
 };
 
 // Prototypes
