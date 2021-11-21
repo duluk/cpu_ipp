@@ -1,6 +1,6 @@
 # cpu_ipp
 
-Calculate number of instructions per (time) period.
+Calculate number of "instructions" per (time) period.
 
 ## Genesis
 
