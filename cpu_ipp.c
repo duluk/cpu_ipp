@@ -220,7 +220,10 @@ parse_options(int argc, char ** argv, struct options* opts)
 
     if (!opts->period)
     {
-        printf("Defaulting to 1ms for period.\n\n");
+        if (!opts->terse)
+        {
+            printf("Defaulting to 1ms for period.\n\n");
+        }
         opts->period = 1;
         opts->multiplier = MILLISECONDS;
     }
