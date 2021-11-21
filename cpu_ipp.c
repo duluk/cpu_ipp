@@ -51,7 +51,7 @@ digits10(uint64_t v)
     }
 }
 
-char *
+char*
 reverse_str(char* s)
 {
     char* ptr = NULL;
@@ -83,6 +83,7 @@ add_comma(uint64_t num)
 
     uint32_t digits = digits10(num);
 
+    // TODO: make sure this is legal
     memset(str, 0, BUFSIZ);
 
     // This essentially converts a number to a string, adding a comma every
@@ -220,12 +221,16 @@ int main(int argc, char ** argv)
         }
     }
 
+    // I'm doing something wrong with this. Compiler complains about assigning
+    // to a const qualifier. Not sure why it's considered a const qualifier.
+    // And if I execute "units[2] = '\0'" it segfaults unless compiled with
+    // optimizations. So I used memset instead.
     char* units = malloc(3);
+    memset(units, 0, 3);
     units =
-        opts->multiplier == NANOSECONDS ? "ns" :
-        opts->multiplier == MICROSECONDS ? "us" :
-        "ms";
-    units[2] = '\0';
+          opts->multiplier == NANOSECONDS ? "ns"
+        : opts->multiplier == MICROSECONDS ? "us"
+        : "ms";
 
     printf("A CPU running at %luGHz will perform %s instructions in %d%s:\n\n",
         opts->cpu_speed / ONE_BILLION,
