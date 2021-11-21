@@ -15,7 +15,7 @@
 // 1. Handle normal CPU speeds, like 2.75. Currently integer only.
 // 2. Add long option support, since it's in usage...
 // 3. Need some more error checking. E.g., atoi results.
-// 4. Add '-s' for short output, just the instructions per period given
+// 4. *DONE* Add '-s' for short output, just the instructions per period given
 // 5. *DONE* Add '-e' for extra information, which is currently always displayed
 // 6. Use CPU speed and topology of current machine, if no cpu speed is given
 //    (OS dependent)
@@ -27,6 +27,8 @@ usage(void)
     printf("cpu_ipp - Calculate number instructions per period\n\n");
     printf("\t--cpu-speed, -c\tCPU speed in GHz\n");
     printf("\t--period, -p\tTime period in [ns, us, ms]\n");
+    printf("\t--terse, t\tTerse output: only ipp\n");
+    printf("\t--extra, -e\tShow extra data for given CPU speed\n");
     printf("\n");
 }
 
