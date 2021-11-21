@@ -14,6 +14,8 @@
 #define MICROSECONDS 1000000
 #define MILLISECONDS 1000
 
+#define UNITS_SIZE 3
+
 struct options {
     uint64_t cpu_speed;
     uint32_t period;
