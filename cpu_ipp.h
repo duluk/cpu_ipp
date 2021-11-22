@@ -17,7 +17,7 @@
 #define UNITS_SIZE 3
 
 struct options {
-    uint64_t cpu_speed;
+    float    cpu_speed;
     uint32_t period;
     uint32_t multiplier;
     bool     extra_info;

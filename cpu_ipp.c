@@ -194,7 +194,7 @@ parse_options(int argc, char ** argv, struct options* opts)
                 opts->extra_info = true;
                 break;
             case 'c':
-                opts->cpu_speed = atoi(optarg);
+                opts->cpu_speed = atof(optarg);
                 opts->cpu_speed *= ONE_BILLION;
                 break;
             case 'p':
@@ -242,7 +242,7 @@ int main(int argc, char ** argv)
     if (DEBUG)
     {
         if (opts->cpu_speed)
-            printf("CPU speed = %luGHz\n", opts->cpu_speed);
+            printf("CPU speed = %fGHz\n", opts->cpu_speed);
 
         if (opts->period)
         {
@@ -269,7 +269,7 @@ int main(int argc, char ** argv)
     }
     else
     {
-        printf("A CPU running at %luGHz will perform %s instructions in %d%s.\n\n",
+        printf("A CPU running at %.2fGHz will perform %s instructions in %d%s.\n\n",
             opts->cpu_speed / ONE_BILLION,
             add_comma(ipp),
             opts->period,
