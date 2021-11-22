@@ -12,7 +12,7 @@
 // CPU speed and time. First draft. Will add other info later...
 //
 // TODO:
-// 1. Handle normal CPU speeds, like 2.75. Currently integer only.
+// 1. *DONE* Handle normal CPU speeds, like 2.75. Currently integer only.
 // 2. Add long option support, since it's in usage...
 // 3. Need some more error checking. E.g., atoi results.
 // 4. *DONE* Add '-s' for short output, just the instructions per period given
