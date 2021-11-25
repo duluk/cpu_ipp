@@ -267,10 +267,10 @@ int main(int argc, char ** argv)
     // optimizations. So I used memset instead.
     char* units = malloc(UNITS_SIZE);
     memset(units, 0, UNITS_SIZE);
-    units =
+    snprintf(units, UNITS_SIZE, "%s",
           opts->multiplier == NANOSECONDS ? "ns"
         : opts->multiplier == MICROSECONDS ? "us"
-        : "ms";
+        : "ms");
 
     uint64_t ipp = (opts->cpu_speed / opts->multiplier) * opts->period;
     if (opts->terse)
