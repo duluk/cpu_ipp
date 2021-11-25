@@ -261,8 +261,7 @@ int main(int argc, char ** argv)
         }
     }
 
-    char* units = malloc(UNITS_SIZE);
-    memset(units, 0, UNITS_SIZE);
+    char units[UNITS_SIZE] = "";
     snprintf(units, UNITS_SIZE, "%s",
           opts->multiplier == NANOSECONDS ? "ns"
         : opts->multiplier == MICROSECONDS ? "us"
