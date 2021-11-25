@@ -279,7 +279,7 @@ int main(int argc, char ** argv)
     }
     else
     {
-        printf("A CPU running at %.2fGHz will perform %s instructions in %d%s.\n\n",
+        printf("A CPU core running at %.2fGHz will perform %s instructions in %d%s.\n\n",
             opts->cpu_speed / ONE_BILLION,
             add_comma(ipp),
             opts->period,
