@@ -261,10 +261,6 @@ int main(int argc, char ** argv)
         }
     }
 
-    // I'm doing something wrong with this. Compiler complains about assigning
-    // to a const qualifier. Not sure why it's considered a const qualifier.
-    // And if I execute "units[2] = '\0'" it segfaults unless compiled with
-    // optimizations. So I used memset instead.
     char* units = malloc(UNITS_SIZE);
     memset(units, 0, UNITS_SIZE);
     snprintf(units, UNITS_SIZE, "%s",
@@ -290,7 +286,6 @@ int main(int argc, char ** argv)
     {
         show_extra_info(opts);
     }
-
 
     exit(EXIT_SUCCESS);
 }
