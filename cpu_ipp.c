@@ -13,7 +13,7 @@
 //
 // TODO:
 // 1. *DONE* Handle normal CPU speeds, like 2.75. Currently integer only.
-// 2. Add long option support, since it's in usage...
+// 2. *DONE* Add long option support, since it's in usage...
 // 3. Need some more error checking. E.g., atoi results.
 // 4. *DONE* Add '-s' for short output, just the instructions per period given
 // 5. *DONE* Add '-e' for extra information, which is currently always displayed
@@ -173,6 +173,16 @@ parse_options(int argc, char ** argv, struct options* opts)
 {
     int opt = 0;
 
+    const char* short_opts = "ec:hp:t";
+    const struct option long_opts[] = {
+        {"cpu-speed", required_argument, NULL, 'c'},
+        {"period", required_argument, NULL, 'p'},
+        {"terse", no_argument, NULL, 't'},
+        {"extra", no_argument, NULL, 'e'},
+        {"help", no_argument, NULL, 'h'},
+        {NULL, 0, NULL, 0}
+    };
+
     if (argc == 1)
     {
         usage();
@@ -183,7 +193,7 @@ parse_options(int argc, char ** argv, struct options* opts)
     opts->extra_info = false;
     opts->terse = false;
 
-    while ((opt = getopt(argc, argv, "ec:hp:t")) != -1)
+    while ((opt = getopt_long(argc, argv, short_opts, long_opts, NULL)) != -1)
     {
         switch(opt)
         {
