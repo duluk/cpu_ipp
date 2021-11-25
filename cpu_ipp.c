@@ -270,7 +270,7 @@ int main(int argc, char ** argv)
     uint64_t ipp = (opts->cpu_speed / opts->multiplier) * opts->period;
     if (opts->terse)
     {
-        printf("%llu\n", ipp);
+        printf("%lu\n", ipp);
     }
     else
     {
